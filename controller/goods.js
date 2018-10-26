@@ -13,10 +13,10 @@ exports.addGoods = async (ctx, next) => {
       return doc;
     }
   });
-  if (doc.length === 0) {
+  if (doc.length !== 0) {
     ctx.body = {
       code: 0,
-      msg: "添加用户已存在",
+      msg: "添加商品已存在",
       data: []
     };
   } else {
