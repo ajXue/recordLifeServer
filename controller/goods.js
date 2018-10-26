@@ -13,7 +13,7 @@ exports.addGoods = async (ctx, next) => {
       return doc;
     }
   });
-  if (doc.length !== 0) {
+  if (findInfo.length !== 0) {
     ctx.body = {
       code: 0,
       msg: "添加商品已存在",

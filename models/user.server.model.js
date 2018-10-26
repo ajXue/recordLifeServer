@@ -10,7 +10,8 @@ var UserSchema = new mongoose.Schema({
         brand: String,
         model: String,
         version: String
-    }
+    },
+    goodsId: Array
 })
 
 var User = mongoose.model('User', UserSchema);

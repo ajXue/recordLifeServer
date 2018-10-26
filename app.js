@@ -24,24 +24,26 @@ db.on("error", error => {
 //
 
 // SSL options
-var options = {
-  key: fs.readFileSync("/cert/1540481862542.key"),
-  cert: fs.readFileSync("/cert/1540481862542.crt")
-};
+// var options = {
+//   key: fs.readFileSync("/cert/1540481862542.key"),
+//   cert: fs.readFileSync("/cert/1540481862542.crt")
+// };
 
 // start the server
-http.createServer(app.callback()).listen(80);
+// http.createServer(app.callback()).listen(80);
 
 app
   .use(require("./router/goods").routes())
   .use(require("./router/goods").allowedMethods())
   .use(require("./router/index").routes())
-  .use(require("./router/index").allowedMethods());
-//    .use(require('./router/users').routes())
-//    .use(require('./router/users').allowedMethods())
+  .use(require("./router/index").allowedMethods())
+  .use(require("./router/users").routes())
+  .use(require("./router/users").allowedMethods())
+  .use(require("./router/login").routes())
+  .use(require("./router/login").allowedMethods())
 
 // https 服务器启动
-https.createServer(options, app.callback()).listen(443);
+// https.createServer(options, app.callback()).listen(443);
 
 //http 服务器启动
 app.listen("3000", function(msg) {

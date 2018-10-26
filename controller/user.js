@@ -1,9 +1,9 @@
 var mongoose = require("mongoose");
-var Users = require("../models/users.server.model");
+var Users = require("../models/user.server.model");
 
 
 // 新增新用户
-Users.addUser = async (ctx, next) => {
+exports.addUser = async (ctx, next) => {
   let query = ctx.request.query;
   let doc = await Users.find({ phone: query.username }, function(err, doc) {
     if (err) {
@@ -41,3 +41,4 @@ Users.addUser = async (ctx, next) => {
     })
   }
 };
+
