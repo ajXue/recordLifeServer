@@ -23,9 +23,9 @@ exports.addGoods = async (ctx, next) => {
     var good = new Goods({
       goodName: query.goodName,
       goodPrice: query.goodPrice,
-      goodImg: "",
-      goodSec: "",
-      goodAddTime: ""
+      goodImg: query.goodImg,
+      goodSec: query.goodSec,
+      goodAddTime: new Date().getTime()
     });
     good.save(function(error) {
       if (error) {
