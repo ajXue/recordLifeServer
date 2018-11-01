@@ -11,6 +11,7 @@ const mongoose = require("mongoose");
 const app = new Koa();
 mongoose.connect("mongodb://127.0.0.1:27017/recordLife");
 
+// test
 const db = mongoose.connection;
 const enforceHttps = require("koa-sslify");
 
