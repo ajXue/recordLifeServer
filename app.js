@@ -2,7 +2,10 @@
 
 const Koa = require("koa");
 const router = require("./router/goods");
+const koaBody = require("koa-body");
+const koaStatic = require("koa-static");
 const bodyParser = require("koa-bodyparser");
+const path = require("path");
 const fs = require("fs");
 const http = require("http");
 const https = require("https");
@@ -19,20 +22,27 @@ db.on("error", error => {
   console.log("连接数据库失败");
 });
 
+var staticServer = koaStatic(path.join(__dirname)+'/public/');
+console.log(path.join(__dirname, '/public/'));
 // Force HTTPS on all page
 // app.use(enforceHttps());
 // app.use(bodyParser());
 //
+app.use(koaBody({
+    multipart: true,
+        formidable: {
+                maxFileSize: 2000*1024*1024
+                    }
+})).use(staticServer);
 
 // SSL options
- var options = {
+var options = {
    key: fs.readFileSync("/cert/1540481862542.key"),
    cert: fs.readFileSync("/cert/1540481862542.crt")
  };
 
 // start the server
-// http.createServer(app.callback()).listen(80);
-
+ //http.createServer(app.callback()).listen(80);
 app
   .use(require("./router/goods").routes())
   .use(require("./router/goods").allowedMethods())
