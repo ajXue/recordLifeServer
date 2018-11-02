@@ -11,6 +11,7 @@ router.post('/findUser', async (ctx, next) => {
 })
 
 router.get("/upload", async (ctx, next) => {
+    console.log(ctx);
     ctx.body = "上传图片"
 })
 

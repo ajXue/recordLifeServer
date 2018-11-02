@@ -32,7 +32,6 @@ var options = {
 
 // start the server
  //http.createServer(app.callback()).listen(80);
-
 app
   .use(require("./router/goods").routes())
   .use(require("./router/goods").allowedMethods())
