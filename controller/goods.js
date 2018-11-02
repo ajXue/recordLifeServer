@@ -9,9 +9,8 @@ exports.addGoods = async (ctx, next) => {
   ) {
     if (err) {
       console.log("add Error:", err);
-    } else {
-      return doc;
     }
+    return doc;
   });
   if (findInfo.length !== 0) {
     ctx.body = {
@@ -27,16 +26,13 @@ exports.addGoods = async (ctx, next) => {
       goodSec: query.goodSec,
       goodAddTime: new Date().getTime()
     });
-    good.save(function(error) {
-      if (error) {
-        ctx.body = "error";
-        return next();
-      }
-    });
+    var newGoodDoc = await good.save();
     ctx.body = {
       code: 1,
       msg: "添加成功",
-      data: []
+      data: {
+        userId: newGoodDoc["_id"]
+      }
     };
   }
 };
