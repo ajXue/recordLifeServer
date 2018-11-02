@@ -10,4 +10,8 @@ router.post('/findUser', async (ctx, next) => {
     ctx.body = "11";
 })
 
+router.get("/upload", async (ctx, next) => {
+    ctx.body = "上传图片"
+})
+
 module.exports = router
