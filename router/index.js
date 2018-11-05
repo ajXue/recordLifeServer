@@ -29,12 +29,14 @@ router.post("/upload", async (ctx, next) => {
         }
         return doc;
     })
+    console.log("filePath",filePath);
     var doc = await Good.update({_id: userId}, {goodImg:filePath}, function(err, doc) {
         if(err) {
             console.log(err)
         }
         return doc;
     })
+    console.log(doc);
     ctx.body = "上传成功";
 })
 
