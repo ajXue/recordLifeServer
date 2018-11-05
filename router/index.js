@@ -23,12 +23,12 @@ router.post("/upload", async (ctx, next) => {
     // 创造可写流
     const upStream = fs.createWriteStream(filePath);
     reader.pipe(upStream);
-    var doc =await Good.find({_id, userId}, function(err, doc) {
-        if(err) {
-            console.log(err);
-        }
-        return doc;
-    })
+    // var doc =await Good.find({_id, userId}, function(err, doc) {
+    //     if(err) {
+    //         console.log(err);
+    //     }
+    //     return doc;
+    // })
     console.log("filePath",filePath);
     var doc = await Good.update({_id: userId}, {goodImg:filePath}, function(err, doc) {
         if(err) {
