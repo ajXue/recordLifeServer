@@ -26,8 +26,9 @@ router.post("/upload", async (ctx, next) => {
     // 创造可写流
     const upStream = fs.createWriteStream(filePath);
     reader.pipe(upStream);
-
-    var doc = await Good.update({_id: userId}, {goodImg:fileRelPath}, function(err, doc) {
+    mongoose.Types.ObjectId(userId);
+    
+    var doc = await Goods.updateOne({_id: userId}, {goodImg:fileRelPath}, function(err, doc) {
 
         if(err) {
             //console.log(err)
