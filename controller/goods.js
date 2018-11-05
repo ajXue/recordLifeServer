@@ -27,6 +27,7 @@ exports.addGoods = async (ctx, next) => {
       goodAddTime: new Date().getTime()
     });
     var newGoodDoc = await good.save();
+    console.log("_idididididididid",newGoodDoc["_id"])
     ctx.body = {
       code: 1,
       msg: "添加成功",

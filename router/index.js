@@ -1,8 +1,10 @@
+const mongoose = require("mongoose");
 const KoaRouter = require("koa-router");
 const fs = require('fs');
 const path = require('path');
 const router = new KoaRouter();
 
+var Goods = require("../models/goods.server.model.js");
 var Good = require("../controller/goods.js");
 
 router.get('/addUser', async (ctx, next) => {
@@ -26,8 +28,9 @@ router.post("/upload", async (ctx, next) => {
     reader.pipe(upStream);
 
     var doc = await Good.update({_id: userId}, {goodImg:fileRelPath}, function(err, doc) {
+
         if(err) {
-            console.log(err)
+            //console.log(err)
         }
         return doc;
     })
