@@ -1,8 +1,10 @@
+const mongoose = require("mongoose");
 const KoaRouter = require("koa-router");
 const fs = require('fs');
 const path = require('path');
 const router = new KoaRouter();
 
+var Goods = require("../models/goods.server.model.js");
 var Good = require("../controller/goods.js");
 
 router.get('/addUser', async (ctx, next) => {
@@ -23,20 +25,18 @@ router.post("/upload", async (ctx, next) => {
     // 创造可写流
     const upStream = fs.createWriteStream(filePath);
     reader.pipe(upStream);
-    var doc =await Good.find({_id, userId}, function(err, doc) {
-        if(err) {
-            console.log(err);
-        }
-        return doc;
-    })
+    
     console.log("filePath",filePath);
-    var doc = await Good.update({_id: userId}, {goodImg:filePath}, function(err, doc) {
+    console.log("userId", userId);    
+    sId = (userId.toString());
+   	    console.log(sId)
+    var doc = await Goods.update({_id: userId},{goodImg:filePath}, function(err, doc) {
         if(err) {
-            console.log(err)
+            //console.log(err)
         }
         return doc;
     })
-    console.log(doc);
+ 
     ctx.body = "上传成功";
 })
 
