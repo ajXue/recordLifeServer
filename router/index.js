@@ -18,25 +18,19 @@ router.post("/upload", async (ctx, next) => {
     const file = ctx.request.files.file;
     const userId = ctx.request.body.userId;
     const reader = fs.createReadStream(file.path);
-    let filePath = '/home/Nodejs/public/load'+ `/${file.name}`;    
-    //let filePath = path.join(__dirname, 'public/load') + `/${file.name}`;
+    let filePath = '/home/Nodejs/public/upload'+ `/${file.name}`;    
+    let fileRelPath = '/upload'+ `/${file.name}`;
+    //let filePath = path.join(__dirname, 'public/upload') + `/${file.name}`;
     // 创造可写流
     const upStream = fs.createWriteStream(filePath);
     reader.pipe(upStream);
-    // var doc =await Good.find({_id, userId}, function(err, doc) {
-    //     if(err) {
-    //         console.log(err);
-    //     }
-    //     return doc;
-    // })
-    console.log("filePath",filePath);
-    var doc = await Good.update({_id: userId}, {goodImg:filePath}, function(err, doc) {
+
+    var doc = await Good.update({_id: userId}, {goodImg:fileRelPath}, function(err, doc) {
         if(err) {
             console.log(err)
         }
         return doc;
     })
-    console.log(doc);
     ctx.body = "上传成功";
 })
 
