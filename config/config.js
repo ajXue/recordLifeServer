@@ -5,6 +5,8 @@ const wxConfig = {
   grant_type: "authorization_code"
 };
 const Config = {
+  appid: "wxdeb0e3ab2383ffd0",
+
   mongodb: "mongodb://127.0.0.1:27017/recordLife",
 
   code2Session: `${wxConfig.hostname}?appid=${wxConfig.appid}&secret=${

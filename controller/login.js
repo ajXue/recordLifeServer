@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const https = require("https");
-var Config = require("../config/config");
+const Config = require("../config/config");
+
+// 微信官方文件
+var WXBizDataCrypt = require('../utils/WXBizDataCrypt')
 
 exports.getWxInfo = async (ctx, next) => {
   let query = ctx.request.query;
@@ -33,3 +36,20 @@ exports.getWxInfo = async (ctx, next) => {
     };
   }
 };
+
+
+exports.getWxPhone = async(ctx, next) => {
+  let query = ctx.request.query;
+      encryptedData = query.encry,
+      sessionKey = query.sessionKey,
+      iv = query.iv,
+      appId = Config.appid;
+
+  var pc = new WXBizDataCrypt(appId, sessionKey);
+  var data = pc.decryptData(encryptedData , iv);
+  ctx.body = {
+    code: 1,
+    msg: "返回成功",
+    data: data
+  }
+}
